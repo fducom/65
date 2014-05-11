@@ -1,0 +1,19 @@
+
+<div class='container'>
+
+<div class="col-xs-12 col-sm-9">
+	<h1><%= user.name %> </h1>
+	<% if (user.admin) { %>
+		<img src="/images/admin.png">admin
+	<% } else { %>
+			<img src="/images/pawn.png">pawn
+	<% } %>		
+	<h3><%= user.title %> </h3>
+	<hr>
+	<h3>Контакти: <%= user.email %> </h3>
+	
+	<a class="btn btn-medium btn-primary" href="/user/edit/<%= user.id %>">Редагувати</a>
+	</div>
+	
+
+

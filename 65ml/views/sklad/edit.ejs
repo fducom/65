@@ -1,0 +1,32 @@
+	
+<% if (session.authenticated && session.User.admin) { %>	
+	<form action="/sklad/update/<%= sklad.id %>" method="POST" class="form-edit">
+		<h2> Редагувати sklad </h2>
+
+		<input type="hidden" value="<%= session.User.id %>" name="name" type="text" class="form-control"/>
+		<input value="<%= sklad.title %>" name="title" type="text" class="form-control"/>
+		
+		<textarea name="text" id="redactor"/><%= sklad.text %></textarea>
+		<input value="<%= sklad.img %>" name="img" type="text" class="form-control"/>
+		<br>
+		<div class="control-group" type="text">
+	
+			<input name="price" type="text" placeholder="Цена" value="<%= sklad.price %>" class="form-control"/>
+			</div>
+		<div class="control-group" type="text">
+		<select name="category" class="form-control">
+	<option  value="">Динамичиская страница</option>
+		<option  value="indx">Главная</option>
+		<option  value="events">Акции</option>
+		<option  value="accessorize">Аксессуары</option>
+		<option  value="casuals">Одежда</option>
+		<option  value="heels">Обувь</option>
+		<option  value="taxi">Доставка</option>
+		</select>
+	</div>
+		<br>
+		<input type="submit" value="Зберегти" class="btn btn-lg btn-primary btn-block"/>
+		<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+	</form>
+
+ <%} else { res.redirect('/session/new'); } %>

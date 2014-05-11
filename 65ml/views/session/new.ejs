@@ -1,0 +1,23 @@
+<div class="container ">
+<div class="col-xs-12 col-sm-4">
+<form action="/session/create" method="POST"  style="padding:20px;">
+	<h2 class="form-signin-heading">Вход для клиентов</h2>
+
+	<% if(flash && flash.err) { %>
+		<ul class="alert alert-success">
+	<% Object.keys(flash.err).forEach(function(error) { %>
+		<li><%- JSON.stringify(flash.err[error]) %></li>
+	<% }) %>
+	</ul>
+	<% } %>
+	<p>
+	<input type="text" class="form-control" placeholder="Email" name="email">	</p>
+	<p>
+	<input type="password" class="form-control" placeholder="Пароль" name="password">	</p>
+	<p>
+	<input type="submit" class="btn btn-lg btn-primary btn-block" value="Вхід"/>	</p>
+	<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+	
+</form>
+</div>
+</div>

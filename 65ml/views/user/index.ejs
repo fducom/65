@@ -1,0 +1,71 @@
+
+<div class="container">
+
+<div class="col-xs-12 col-sm-9">
+<ul class="nav nav-pills nav-justified">
+ 
+	<li><a href="/sklad/pages">Страницы</a>(Admin only)</li>
+		    <li><a href="/sklad/new">SKLAD+</a></li>
+			
+					</form>
+	<h4> Фото завантажити на сервак (ссилка там де path брати без /assets/)</h4>
+		<form id="uploadForm"
+      enctype="multipart/form-data"
+      action="/upload/upload"
+      method="post" target="_blank">
+	  
+    <input type="file" id="userPhotoInput" name="userPhoto" />
+	
+            <button type="submit" class="btn btn-success">Завантажити</button>
+			
+            <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+</form>
+</ul>
+	<h3>Адміністративна частина</h3>
+	  
+	<table class='table'>
+	<hr>
+	USERS
+		<tr>
+			<th></th>
+			<th>ID</th>
+			<th>Ім'я</th>
+			<th>Біо</th>
+			<th>Email</th>
+			<th></th>
+			<th></th>
+			<th></th>
+		</tr>
+		
+
+		<% _.each(users, function(user) { %>
+		<tr data-id="<%= user.id %>" data-model="user">
+			<% if (user.online) { %>
+				<td><img src="/images/icon-online.png"></td>
+			<% } else { %>
+				<td> <img src="/images/icon-offline.png"></td>
+			<% } %>
+			<td><%= user.id %></td>
+			<td><%= user.name %></td>
+			<td><%= user.title %></td>
+			<td><%= user.email %></td>
+			<% if (user.admin) { %>
+				<td> <img src="/images/admin.png"></td>
+			<% } else { %>
+				<td> <img src="/images/pawn.png"></td>
+			<% } %>	
+			<td><a href="/user/show/<%= user.id %>" class="btn btn-sm btn-primary">Переглянути</a>
+			<a href="/user/edit/<%= user.id %>" class="btn btn-sm btn-warning">Редагувати</a></td>
+
+			<td><form action="/user/destroy/<%= user.id %>" method="POST">
+				<input type="hidden" name="_method" value="Видалити"/>
+				<input type="submit" class="btn btn-sm btn-danger" value="Видалити"/>
+				<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+			</form></td>
+		</tr> 
+
+		<% }) %>
+	</table>
+	
+</div>
+
